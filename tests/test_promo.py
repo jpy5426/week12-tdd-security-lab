@@ -23,3 +23,8 @@ def test_unknown_code_raises(code):
 
 def test_code_is_case_and_whitespace_insensitive():
     assert apply_promo(10_000, "\tsAvE10\n", TODAY) == 9_000
+
+    def test_flat5_minimum_boundary():
+    assert apply_promo(2_000, "FLAT5", TODAY) == 1_500
+    with pytest.raises(PromoError):
+        apply_promo(1_999, "FLAT5", TODAY)
