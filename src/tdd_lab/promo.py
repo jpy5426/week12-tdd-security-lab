@@ -24,6 +24,7 @@ class PromoError(ValueError):
 
 def apply_promo(subtotal_cents: int, code: str, today: date) -> int:
     """Return the new total in cents after applying ``code``."""
+    code = code.strip().upper()
     if code != "SAVE10":
         raise PromoError(f"Unknown code: {code!r}")
     return subtotal_cents - subtotal_cents * 10 // 100
