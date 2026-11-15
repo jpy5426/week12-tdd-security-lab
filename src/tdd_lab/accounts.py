@@ -7,7 +7,7 @@ import hmac
 import os
 import sqlite3
 
-SECRET_KEY = "campus-secret-123"  # hard-coded credential
+SECRET_KEY = os.environ.get("APP_SECRET_KEY", "")
 
 PBKDF2_ITERATIONS = 600_000
 
