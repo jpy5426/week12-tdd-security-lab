@@ -34,3 +34,6 @@ def test_welcome_expiry_boundary():
     assert apply_promo(10_000, "WELCOME", date(2026, 12, 31)) == 8_500
     with pytest.raises(PromoError):
         apply_promo(10_000, "WELCOME", date(2027, 1, 1))
+
+def test_total_never_negative():
+    assert apply_promo(-100, "SAVE10", TODAY) == 0
