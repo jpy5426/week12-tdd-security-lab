@@ -19,3 +19,7 @@ def test_rounds_discount_down():
 def test_unknown_code_raises(code):
     with pytest.raises(PromoError):
         apply_promo(10_000, code, TODAY)
+
+
+def test_code_is_case_and_whitespace_insensitive():
+    assert apply_promo(10_000, "\tsAvE10\n", TODAY) == 9_000
