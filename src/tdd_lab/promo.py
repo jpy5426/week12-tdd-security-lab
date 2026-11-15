@@ -24,4 +24,4 @@ class PromoError(ValueError):
 
 def apply_promo(subtotal_cents: int, code: str, today: date) -> int:
     """Return the new total in cents after applying ``code``."""
-    return 9_000
+    return subtotal_cents - subtotal_cents * 10 // 100
