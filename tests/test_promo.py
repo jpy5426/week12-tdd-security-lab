@@ -1,7 +1,8 @@
-"""Your TDD workspace. The first test is deliberately RED -- that is step one."""
 from datetime import date
 
-from tdd_lab.promo import apply_promo
+import pytest
+
+from tdd_lab.promo import PromoError, apply_promo
 
 TODAY = date(2026, 11, 9)
 
@@ -9,9 +10,12 @@ TODAY = date(2026, 11, 9)
 def test_save10_takes_ten_percent_off():
     assert apply_promo(10_000, "SAVE10", TODAY) == 9_000
 
-# Next: write a failing test for the next rule, make it pass, refactor. Repeat.
-# Think edge cases: rounding, case/whitespace, minimums, expiry date boundary,
-# unknown code, and a total that would otherwise go negative.
 
 def test_rounds_discount_down():
     assert apply_promo(1_005, "SAVE10", TODAY) == 905
+
+
+@pytest.mark.parametrize("code", ["SAVE20", "", "SAVE 10"])
+def test_unknown_code_raises(code):
+    with pytest.raises(PromoError):
+        apply_promo(10_000, code, TODAY)
