@@ -7,6 +7,7 @@ from tdd_lab.accounts import add_user, find_user, init_db
 from tdd_lab import exporter
 from tdd_lab.importer import compute_discount, load_session
 
+
 @pytest.fixture
 def conn():
     connection = sqlite3.connect(":memory:")

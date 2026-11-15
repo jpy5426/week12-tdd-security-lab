@@ -39,4 +39,3 @@ def test_welcome_expiry_boundary():
 
 def test_total_never_negative():
     assert apply_promo(-100, "SAVE10", TODAY) == 0
-
