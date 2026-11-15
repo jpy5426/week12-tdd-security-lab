@@ -1,4 +1,5 @@
 """Legacy data importer -- INTENTIONALLY INSECURE."""
+import ast
 import json
 
 
@@ -8,5 +9,5 @@ def load_session(blob: bytes):
 
 
 def compute_discount(expression: str):
-    # "Flexible" pricing rules typed in by an admin.
-    return eval(expression)
+    # literal_eval accepts plain values only; it never runs code.
+    return ast.literal_eval(expression)
