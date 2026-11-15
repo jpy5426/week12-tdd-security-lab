@@ -30,7 +30,7 @@ def test_flat5_minimum_boundary():
     with pytest.raises(PromoError):
         apply_promo(1_999, "FLAT5", TODAY)
 
-        def test_welcome_expiry_boundary():
+def test_welcome_expiry_boundary():
     assert apply_promo(10_000, "WELCOME", date(2026, 12, 31)) == 8_500
     with pytest.raises(PromoError):
         apply_promo(10_000, "WELCOME", date(2027, 1, 1))
