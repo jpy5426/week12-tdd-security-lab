@@ -5,6 +5,7 @@ import pytest
 
 from tdd_lab.accounts import add_user, find_user, init_db
 from tdd_lab import exporter
+from tdd_lab.importer import compute_discount, load_session
 
 @pytest.fixture
 def conn():
@@ -38,3 +39,7 @@ def test_archive_report_does_not_use_shell(monkeypatch):
     args, kwargs = calls[0]
     assert args == ["zip", "-q", "archive.zip", "--", hostile]
     assert not kwargs.get("shell")
+
+
+def test_load_session_reads_json():
+    assert load_session(b'{"user": "ada"}') == {"user": "ada"}
