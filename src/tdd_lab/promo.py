@@ -22,17 +22,22 @@ class PromoError(ValueError):
     """Raised when a promo code cannot be applied."""
 
 
+WELCOME_LAST_DAY = date(2026, 12, 31)
+FLAT5_MINIMUM = 2_000
+FLAT5_DISCOUNT = 500
+
+
 def apply_promo(subtotal_cents: int, code: str, today: date) -> int:
     """Return the new total in cents after applying ``code``."""
     code = code.strip().upper()
     if code == "SAVE10":
         discount = subtotal_cents * 10 // 100
     elif code == "FLAT5":
-        if subtotal_cents < 2_000:
+        if subtotal_cents < FLAT5_MINIMUM:
             raise PromoError("FLAT5 requires a $20.00 subtotal")
-        discount = 500
+        discount = FLAT5_DISCOUNT
     elif code == "WELCOME":
-        if today > date(2026, 12, 31):
+        if today > WELCOME_LAST_DAY:
             raise PromoError("WELCOME has expired")
         discount = subtotal_cents * 15 // 100
     else:
