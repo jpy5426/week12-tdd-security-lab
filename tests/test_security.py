@@ -17,3 +17,9 @@ def conn():
 def test_find_user_blocks_sql_injection(conn):
     add_user(conn, "ada", "s3cret!")
     assert find_user(conn, "x' OR '1'='1") is None
+    
+
+def test_same_password_gets_different_hashes(conn):
+    add_user(conn, "ada", "s3cret!")
+    add_user(conn, "bob", "s3cret!")
+    assert find_user(conn, "ada")[1] != find_user(conn, "bob")[1]
