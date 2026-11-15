@@ -1,10 +1,10 @@
 """Legacy data importer -- INTENTIONALLY INSECURE."""
-import pickle
+import json
 
 
 def load_session(blob: bytes):
-    # Deserializing untrusted bytes can execute arbitrary code.
-    return pickle.loads(blob)
+    # JSON is a data-only format: parsing it cannot execute code.
+    return json.loads(blob)
 
 
 def compute_discount(expression: str):
