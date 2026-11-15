@@ -37,4 +37,4 @@ def apply_promo(subtotal_cents: int, code: str, today: date) -> int:
         discount = subtotal_cents * 15 // 100
     else:
         raise PromoError(f"Unknown code: {code!r}")
-    return subtotal_cents - discount
+    return max(subtotal_cents - discount, 0)
