@@ -43,3 +43,9 @@ def test_archive_report_does_not_use_shell(monkeypatch):
 
 def test_load_session_reads_json():
     assert load_session(b'{"user": "ada"}') == {"user": "ada"}
+
+
+def test_compute_discount_rejects_code():
+    assert compute_discount("0.1") == 0.1
+    with pytest.raises(ValueError):
+        compute_discount("__import__('os').getcwd()")
